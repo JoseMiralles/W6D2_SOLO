@@ -12,15 +12,17 @@ class SQLObject
   end
 
   def self.table_name=(table_name)
-    # ...
+    @table_name = table_name
   end
 
   def self.table_name
-    # ...
+    # ex: If the class name is Cat then return cats.
+    return @table_name if @table_name != nil
+    self.to_s.tableize
   end
 
   def self.all
-    # ...
+    
   end
 
   def self.parse_all(results)
