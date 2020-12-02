@@ -47,7 +47,14 @@ class SQLObject
   end
 
   def self.find(id)
-    # ...
+    query = <<-SQL
+      SELECT #{self.table_name}.*
+      FROM #{self.table_name}
+      WHERE id = #{id}
+    SQL
+    hash = DBConnection.execute(query).first
+    return nil if hash == nil
+    self.new(hash)
   end
 
   def initialize(params = {})
